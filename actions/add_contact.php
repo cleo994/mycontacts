@@ -1,7 +1,7 @@
 <?php session_start() ?>
 <?php 
 
-require('../config/db.php');
+require_once('../config/db.php');
 
 $required = array(
 	'contact_firstname',
@@ -35,13 +35,14 @@ foreach($required as $r) {
 }
 
 // Add contact to DB
-
+fwrite($f,"\n{$_POST['contact_firstname']},{$_POST['contact_lastname']},{$_POST['contact_email']},{$_POST['contact_phone']}");
 
 // Connect to DB
-$conn = new mysqli();
+$conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
 // Query DB
-
+$sql = "INSERT INTO contacts (contact_firstname,contact_lastname,contact_email,contact_phone) VALUES ('$contact_firstname','$contact_lastname','$contact_email','$contact_phone')";
+$conn->query($sql);
 
 // Close connection
 $conn->close();
