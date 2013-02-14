@@ -1,6 +1,5 @@
 <?php session_start() ?>
-<pre><?php print_r($_POST) ?></pre>
-<?php
+<?php 
 
 require('../config/db.php');
 
@@ -37,14 +36,17 @@ foreach($required as $r) {
 
 // Add contact to DB
 
+
 // Connect to DB
 $conn = new mysqli();
 
 // Query DB
 
+
 // Close connection
+$conn->close();
 
 // Set location header
-header('Location:../?p=list_contact');
+header('Location:../?p=list_contacts');
 
 // Else, add to DB & redirect to contact list

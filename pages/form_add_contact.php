@@ -3,8 +3,8 @@
 	<div class="control-group">
 		<label class="control-label" for="contact_name">Name</label>
 		<div class="controls">
-		<?php echo input('contact_firstname', 'first name')?>
-		<?php echo input('contact_lastname', 'last name')?>
+		<?php echo input('contact_firstname', 'First Name')?>
+		<?php echo input('contact_lastname', 'Last Name')?>
 		</div>
 	</div>
 	<div class="control-group">
