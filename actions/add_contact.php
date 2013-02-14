@@ -48,6 +48,10 @@ $conn->query($sql);
 $conn->close();
 
 // Set location header
+$_SESSION['message']= array(
+	'type'=>'success',
+	'text'=>"<strong>$contact_firstname $contact_lastname</strong> has been added to your contacts!",		
+);
 header('Location:../?p=list_contacts');
 
 // Else, add to DB & redirect to contact list
