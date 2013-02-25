@@ -21,7 +21,7 @@ $conn->close();
 
 // Redirect
 $_SESSION['message']= array(
-		'type'=>'warning',
+		'type'=>'alert alert-info',
 		'text'=>"They're gone, you monster.",
 );
 header('Location:../?p=list_contacts');

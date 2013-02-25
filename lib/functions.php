@@ -39,6 +39,7 @@ function input($name, $placeholder, $value=null, $class='') {
 
 function dropdown($name, $options) {
 	$select = "<select name=\"$name\">";
+	
 	// Add option elements to select element
 	foreach($options as $value => $text) {
 		// If there is session form data for $name, AND its value
