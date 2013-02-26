@@ -30,6 +30,10 @@ $conn->close();
 	<label>Phone Number</label>
 	<input type="text" name="contact_phone" value="<?php echo $contact_phone ?>" />
 	<br/>
+	
+	<label>Group</label>
+	
+	
 	<input type="hidden" name="contact_id" value="<?php echo $_GET['id'] ?>" />
 	<input type="submit" value="Edit" />
 </form>

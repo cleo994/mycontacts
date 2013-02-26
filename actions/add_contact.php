@@ -7,7 +7,8 @@ $required = array(
 	'contact_firstname',
 	'contact_lastname',
 	'contact_email',
-	'contact_phone'
+	'contact_phone',
+	'group_id'
 );
 
 // Extract form data
@@ -34,15 +35,18 @@ foreach($required as $r) {
 	}
 }
 
-// Add contact to DB
-fwrite($f,"\n{$_POST['contact_firstname']},{$_POST['contact_lastname']},{$_POST['contact_email']},{$_POST['contact_phone']}");
-
 // Connect to DB
 $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
 // Query DB
-$sql = "INSERT INTO contacts (contact_firstname,contact_lastname,contact_email,contact_phone) VALUES ('$contact_firstname','$contact_lastname','$contact_email','$contact_phone')";
+$sql = "INSERT INTO contacts (contact_firstname,contact_lastname,contact_email,contact_phone,group_id) VALUES ('$contact_firstname','$contact_lastname','$contact_email','$contact_phone',$group_id)";
 $conn->query($sql);
+
+// Check for a SQL error
+if($conn->errno > 0) {
+	echo $conn->error;
+	die();
+}
 
 // Close connection
 $conn->close();

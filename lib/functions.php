@@ -1,4 +1,9 @@
 <?php
+function connect() {
+	return new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+}
+
+
 function format_phone($phone) {
 	return '<a href="tel:;'.$phone.'">('.substr($phone,0,3).')-'.substr($phone,3,3).'-'.substr($phone,-4).'</a>';
 }
@@ -37,7 +42,7 @@ function input($name, $placeholder, $value=null, $class='') {
  * @return HTML select element
  */
 
-function dropdown($name, $options) {
+function dropdown($name, $options, $value = null) {
 	$select = "<select name=\"$name\">";
 	
 	// Add option elements to select element
@@ -81,4 +86,32 @@ function radio($name, $options) {
 		$radio .= "<label><input type=\"radio\" name=\"$name\" value=\"$value\" $checked >$text</option>";
 	}
 	return $radio;
+}
+
+function get_options($table,$default_value=0,$default_name='Select'){
+	$options = array($default_value => $default_name);
+
+	// Field names
+	$id_field = $table.'_id';
+	$name_field = $table.'_name';
+
+	// Connect to DB
+	$conn = connect();
+	
+	// Query table for id's &names
+	$sql = "SELECT $id_field, $name_field FROM {$table}s ORDER BY $name_field";
+	$results = $conn->query($sql);
+	
+	// Loop over result set, adding all rows to $options
+	while(($row =  $results->fetch_assoc()) != null) {
+		$key =  $row[$id_field];
+		$value = $row[$name_field];
+		$options[$key] = $value;
+	}
+	
+	// Close DB connection
+	$conn->close();
+	
+	// Return options
+	
 }

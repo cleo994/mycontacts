@@ -18,14 +18,22 @@
 		<div class="controls">
 		<?php echo input('contact_phone','9998887777') ?>
 	</div>
+	</div>
 	<div class="control-group">
-	<label class="control-label" for="contact_group">Group</label>
-	<div class="dropdown">
-	  	<ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	    	<li><a tabindex="0" href="#">Coworkers</a></li>
-	    	<li><a tabindex="1" href="#">Friends</a></li>
-	    	<li><a tabindex="2" href="#">Stalkers</a></li>
-	 	</ul>
+	<label class="group-label" for="contact_group">Group</label>
+	<div class="controls">
+	<?php
+	$conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+	// Query groups table
+	$sql ="SELECT * FROM groups";
+	$results = $conn->query($sql);
+	$options = array(0 =>'Select a group');
+	while(($group = $results->fetch_assoc()) != null){
+		extract($group);
+		$options[$group_id]= $group_name;
+		
+	}
+	echo dropdown("group_id",$options); ?>
 	</div>
 	</div>
 		<div class="form-actions">

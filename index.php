@@ -14,8 +14,9 @@ require('lib/functions.php');
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.css" />
 	
-		<link rel="stylesheet" type="text/css" href="styles.css" >
-		<title>MyContacts</title>
+	<!-- MyContacts CSS -->
+	<link rel="stylesheet" type="text/css" href="styles.css" >
+	<title>MyContacts</title>
 	</head>
 	<body>
 		<div id="wrapper" class="container" >
