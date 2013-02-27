@@ -7,7 +7,8 @@ $required = array(
 	'contact_firstname',
 	'contact_lastname',
 	'contact_email',
-	'contact_phone'
+	'contact_phone',
+	'group_id'
 );
 
 // Extract form data
@@ -36,8 +37,9 @@ foreach($required as $r) {
 
 // Connect to the DB
 $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
+
 // Execute query
-$sql = "UPDATE contacts SET contact_firstname='{$_POST['contact_firstname']}', contact_lastname='{$_POST['contact_lastname']}', contact_email='{$_POST['contact_email']}', contact_phone='{$_POST['contact_phone']}', contact_group='{$_POST['contact_group']}' WHERE contact_id='{$_POST['contact_id']}'";
+$sql = "UPDATE contacts SET contact_firstname='{$_POST['contact_firstname']}', contact_lastname='{$_POST['contact_lastname']}', contact_email='{$_POST['contact_email']}', contact_phone='{$_POST['contact_phone']}', group_id='{$_POST['group_id']}' WHERE contact_id='{$_POST['contact_id']}'";
 $conn->query($sql);
 // Close connection
 $conn->close();
