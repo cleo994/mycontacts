@@ -57,3 +57,11 @@ section {
 	background:#fff;
 	opacity:0.7;
 }
+
+nav form {
+	margin-top:4px;
+}
+
+.input-append {
+	height:inherit !important;
+}

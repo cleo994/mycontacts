@@ -5,14 +5,16 @@
 $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 
 // Query DB
-$sql = 'SELECT * FROM groups ORDER BY group_id';
+$sql = 'SELECT groups.*, COUNT(contact_id) AS num_contacts FROM groups LEFT JOIN contacts ON groups.group_id=contacts.group_id GROUP BY groups.group_id ORDER BY group_id';
 $results=$conn->query($sql);
 
+echo '<table class="table"><tr><th>Group Name</th><th>Number of Members</th></tr>';
 while(($group = $results->fetch_assoc()) != null) {
 	extract($group);
-	?>
-	<li><span class=""></span></li>
-	<?php
+	echo "<tr><td><a href=\"?p=group&id=$group_id\">$group_name</a></td>";
+	echo "<td><span class=\"badge badge-info\">$num_contacts</span></td>";
+	
+	
 }
 echo "</table>";
 $conn->close();

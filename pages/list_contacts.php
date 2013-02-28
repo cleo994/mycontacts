@@ -1,3 +1,21 @@
+<?php 
+function is_search() {
+	return isset($_GET['q']) && $_GET['q'] != '';
+}
+
+// Check to see if user is searching for a contact
+if(isset($_GET['q']) && $_GET['q'] != '') {
+	extract($_GET);
+	$where = "WHERE contact_lastname LIKE '%{$_GET['q']}%' OR contact_firstname LIKE '%{$_GET['q']}%' ";
+	echo $search_message = "<p>Why are you peeping on my peeps with a name containing \"{$_GET['q']}\"? </p>";
+	echo $show_all = '<a href="./?p=list_contacts"><button class="btn btn-success">Show all contacts</button></a>';
+} else {
+	$where = '';
+	$search_message = '';
+	$show_all = '';
+}
+?>
+
 <h2>Contacts</h2>
 <table class="table">
 	<thead>
@@ -6,7 +24,8 @@
 			<th>Email</th>
 			<th>Phone</th>
 			<th>Group</th>
-			<th></th>
+			<th>Edit</th>
+			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -15,7 +34,7 @@
 		$conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 		
 		// Query DB
-		$sql = 'SELECT * FROM contacts LEFT JOIN groups ON contacts.group_id=groups.group_id ORDER BY contact_lastname,contact_firstname';
+		$sql = "SELECT * FROM contacts LEFT JOIN groups ON contacts.group_id=groups.group_id $where ORDER BY contact_lastname,contact_firstname";
 		$results = $conn->query($sql);
 		
 		// Loop over result set, displaying contacts
